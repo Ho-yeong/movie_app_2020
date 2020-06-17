@@ -1,1 +1,28 @@
+# setup
 - npx create-react-app <project-name>
+
+
+
+# Git add and push
+
+-git init
+-git remote add origin <github url>
+
+-git add . // add everything
+-git commit -m "<whatever I wanna comment>"
+-git push origin master
+
+# React
+- making a new Component, React should be imported on the top
+- only one component in one application
+- but it's ok to import component to another component
+- I can give properties(prop) to each components (it looks like HTML Tag)
+- properties can be whatever, not only string, but boolean, array etc..
+- and all of props is going to be argument of its function
+- every component have to have unique key
+
+
+
+# Java Script
+- <array>.map( <function> { return ~~ }) 
+- '.map' return new array of every component of <array> with things that you wanna put after return
