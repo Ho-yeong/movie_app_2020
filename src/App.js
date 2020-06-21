@@ -1,45 +1,56 @@
 import React from "react";
+import axios from "axios";
+import Movie from "./Movie";
 
-function Love({ fav, pic }) {
-  // 매개변수 안의 fav 키값을 지정
-  // 만약 매개변수가 props 일시 밑에 값은 {props.fav} 로 입력 가능
-  return (
-    <div>
-      <h2>I love {fav}</h2>
-      <img src={pic} alt={fav} />
-    </div>
-  );
-}
+class App extends React.Component {
+  state = {
+    isLoading: true,
+    items: [],
+  };
 
-const personILike = [
-  {
-    id: 1,
-    name: "Rick",
-    image:
-      "https://m.media-amazon.com/images/M/MV5BYTRhMjhjMTEtZTY0MC00NjAyLWJkNDQtZmYzN2FjNDM1NTI0XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_UY1200_CR744,0,630,1200_AL_.jpg",
-  },
-  {
-    id: 2,
-    name: "Morty",
-    image: "https://static.tvtropes.org/pmwiki/pub/images/morty_smith_2.png",
-  },
-  {
-    id: 3,
-    name: "Summer",
-    image:
-      "https://vignette.wikia.nocookie.net/rickandmorty/images/a/ad/Summer_is_cool.jpeg/revision/latest/top-crop/width/360/height/360?cb=20160919183158",
-  },
-];
+  getMovie = async () => {
+    const {
+      data: { items },
+    } = await axios.get("/v1/search/movie.json", {
+      params: { query: "아이언맨", display: 20 },
+      headers: {
+        "X-Naver-Client-Id": "08Ky4NuudFEd_oCD5npL",
+        "X-Naver-Client-Secret": "OMXpusCdtI",
+      },
+    });
+    console.log(items);
+    this.setState({ items, isLoading: false });
+  };
 
-function App() {
-  return (
-    <div>
-      <h1>Hello, React!</h1>
-      {personILike.map((human) => {
-        return <Love key={human.id} fav={human.name} pic={human.image} />;
-      })}
-    </div>
-  );
+  componentDidMount() {
+    this.getMovie();
+  }
+
+  render() {
+    const { isLoading, items } = this.state;
+    const movie = items.map((movie) => (
+      <Movie
+        key={movie.image}
+        title={movie.title}
+        poster={movie.image}
+        rating={movie.userRating}
+        director={movie.director}
+        year={movie.pubDate}
+        actor={movie.actor}
+      />
+    ));
+    return (
+      <section className="container">
+        {isLoading ? (
+          <div className="loader">
+            <span className="loader__text">Loading...</span>
+          </div>
+        ) : (
+          <div className="movies">{movie}</div>
+        )}
+      </section>
+    );
+  }
 }
 
 export default App;

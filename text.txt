@@ -1,7 +1,9 @@
 # setup
 - npx create-react-app <project-name>
-
-
+- npm install prop-types
+    // checking proper props that I sent
+- npm install axios
+   // for fetching data
 
 # Git add and push
 
@@ -20,6 +22,11 @@
 - properties can be whatever, not only string, but boolean, array etc..
 - and all of props is going to be argument of its function
 - every component have to have unique key
+- state : one of components of main App and it cna store active argument
+- setState : when you wanna change value of one argument in state, use setState (this.setState({ ~~ }))
+   instead of approaching state (like 'this.state.key') directly
+- React life cycle : mouning - updating - unmounting
+   componentWillMount() - componentDidMount() - componentDidUpdate() - componentWillUnMount()
 
 
 
