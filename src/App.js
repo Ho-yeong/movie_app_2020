@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Movie from "./Movie";
+import "./App.css";
 
 class App extends React.Component {
   state = {
@@ -12,7 +13,7 @@ class App extends React.Component {
     const {
       data: { items },
     } = await axios.get("/v1/search/movie.json", {
-      params: { query: "아이언맨", display: 20 },
+      params: { query: "분노의", display: 20 },
       headers: {
         "X-Naver-Client-Id": "08Ky4NuudFEd_oCD5npL",
         "X-Naver-Client-Secret": "OMXpusCdtI",
@@ -28,17 +29,6 @@ class App extends React.Component {
 
   render() {
     const { isLoading, items } = this.state;
-    const movie = items.map((movie) => (
-      <Movie
-        key={movie.image}
-        title={movie.title}
-        poster={movie.image}
-        rating={movie.userRating}
-        director={movie.director}
-        year={movie.pubDate}
-        actor={movie.actor}
-      />
-    ));
     return (
       <section className="container">
         {isLoading ? (
@@ -46,7 +36,19 @@ class App extends React.Component {
             <span className="loader__text">Loading...</span>
           </div>
         ) : (
-          <div className="movies">{movie}</div>
+          <div className="movies">
+            {items.map((movie) => (
+              <Movie
+                key={movie.image}
+                title={movie.title}
+                poster={movie.image}
+                rating={movie.userRating}
+                director={movie.director}
+                year={movie.pubDate}
+                actor={movie.actor}
+              />
+            ))}
+          </div>
         )}
       </section>
     );

@@ -4,6 +4,9 @@
     // checking proper props that I sent
 - npm install axios
    // for fetching data
+- npm install gh-pages
+   // uploading project on github
+   // write "homepage" : "url" and script 'predeploy' and 'deploy' in packgage.json
 
 # Git add and push
 
