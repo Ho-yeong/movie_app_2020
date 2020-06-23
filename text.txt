@@ -30,6 +30,7 @@
    instead of approaching state (like 'this.state.key') directly
 - React life cycle : mouning - updating - unmounting
    componentWillMount() - componentDidMount() - componentDidUpdate() - componentWillUnMount()
+- putting the 'exact={true}' in App function of App.js take the only one url
 
 
 
